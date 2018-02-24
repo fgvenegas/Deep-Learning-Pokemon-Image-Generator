@@ -226,7 +226,7 @@ optimizerG = optim.Adam(G.parameters(), lr=0.0002, betas=(0.5, 0.999))
 
 # In[28]:
 
-n_epochs = 50
+n_epochs = 10
 
 
 # In[29]:
@@ -280,9 +280,8 @@ for epoch in range(n_epochs):
 
 # In[30]:
 
-torch.save(D, 'D.pt')
-torch.save(G, 'G.pt')
-
+torch.save(G.state_dict(), 'G.pth')
+torch.save(D.state_dict(), 'D.pth')
 # In[ ]:
 
 
