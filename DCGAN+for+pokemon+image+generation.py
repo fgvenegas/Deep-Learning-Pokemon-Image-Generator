@@ -227,7 +227,7 @@ optimizerG = optim.Adam(G.parameters(), lr=0.0002, betas=(0.5, 0.999))
 
 # In[28]:
 
-n_epochs = 100
+n_epochs = 500
 
 
 # In[29]:
