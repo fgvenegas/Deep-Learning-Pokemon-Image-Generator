@@ -282,6 +282,13 @@ for epoch in range(n_epochs):
 
 torch.save(G.state_dict(), 'G.pth')
 torch.save(D.state_dict(), 'D.pth')
+
+import torchvision.utils as vutils
+if i % 50 == 0:
+    noise.resize_(16, nz, 1, 1).normal_(0, 1)
+    noisev = Variable(noise)
+    fake = G(noisev)
+    vutils.save_image(fake.data,'FakeSamples/fake_samples_epoch_%03d.png' % (epoch), normalize=True)
 # In[ ]:
 
 
