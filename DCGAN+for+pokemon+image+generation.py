@@ -16,6 +16,7 @@ import torch
 import torchvision
 import torchvision.datasets as dset
 import torchvision.transforms as transforms
+import torchvision.utils as vutils
 
 
 # #  Read db and apply data augmentation
@@ -271,9 +272,15 @@ for epoch in range(n_epochs):
         loss_g.backward()
         optimizerG.step()
       
-        print("batch size", bs)
+        #print("batch size", bs)
         print('[%d/%d][%d/%d] Loss_D: %.4f Loss_G: %.4f' 
               % (epoch + 1, n_epochs, i + 1, len(dataloader), loss_d, loss_g))
+
+        if i % 50 == 0:
+            noise.resize_(16, nz, 1, 1).normal_(0, 1)
+            noisev = Variable(noise)
+            fake = G(noisev)
+            vutils.save_image(fake.data,'FakeSamples/fake_samples_epoch_%03d.png' % (epoch), normalize=True)
 
 
 # # Test
@@ -282,13 +289,6 @@ for epoch in range(n_epochs):
 
 torch.save(G.state_dict(), 'G.pth')
 torch.save(D.state_dict(), 'D.pth')
-
-import torchvision.utils as vutils
-if i % 50 == 0:
-    noise.resize_(16, nz, 1, 1).normal_(0, 1)
-    noisev = Variable(noise)
-    fake = G(noisev)
-    vutils.save_image(fake.data,'FakeSamples/fake_samples_epoch_%03d.png' % (epoch), normalize=True)
 # In[ ]:
 
 
