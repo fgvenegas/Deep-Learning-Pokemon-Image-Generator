@@ -276,11 +276,11 @@ for epoch in range(n_epochs):
         print('[%d/%d][%d/%d] Loss_D: %.4f Loss_G: %.4f' 
               % (epoch + 1, n_epochs, i + 1, len(dataloader), loss_d, loss_g))
 
-        #if i % 50 == 0:
-        #    noise.resize_(16, nz, 1, 1).normal_(0, 1)
-        #    noisev = Variable(noise)
-        #    fake = G(noisev)
-        #    vutils.save_image(fake.data,'FakeSamples/fake_samples_epoch_%03d.png' % (epoch), normalize=True)
+        if i % 50 == 0:
+            noise.resize_(16, nz, 1, 1).normal_(0, 1)
+            noisev = Variable(noise)
+            fake = G(noisev)
+            vutils.save_image(fake.data,'FakeSamples/fake_samples_epoch_%03d.png' % (epoch), normalize=True)
 
 
 # # Test
