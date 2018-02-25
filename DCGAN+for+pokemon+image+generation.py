@@ -227,7 +227,7 @@ optimizerG = optim.Adam(G.parameters(), lr=0.0002, betas=(0.5, 0.999))
 
 # In[28]:
 
-n_epochs = 500
+n_epochs = 10
 
 
 # In[29]:
@@ -276,17 +276,18 @@ for epoch in range(n_epochs):
         print('[%d/%d][%d/%d] Loss_D: %.4f Loss_G: %.4f' 
               % (epoch + 1, n_epochs, i + 1, len(dataloader), loss_d, loss_g))
 
-        if i % 50 == 0:
-            noise.resize_(16, nz, 1, 1).normal_(0, 1)
-            noisev = Variable(noise)
-            fake = G(noisev)
-            vutils.save_image(fake.data,'FakeSamples/fake_samples_epoch_%03d.png' % (epoch), normalize=True)
+        #if i % 50 == 0:
+        #    noise.resize_(16, nz, 1, 1).normal_(0, 1)
+        #    noisev = Variable(noise)
+        #    fake = G(noisev)
+        #    vutils.save_image(fake.data,'FakeSamples/fake_samples_epoch_%03d.png' % (epoch), normalize=True)
 
 
 # # Test
 
 # In[30]:
-
+G.cpu()
+D.cpu()
 torch.save(G.state_dict(), 'G.pth')
 torch.save(D.state_dict(), 'D.pth')
 # In[ ]:
